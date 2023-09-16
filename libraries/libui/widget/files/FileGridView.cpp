@@ -31,6 +31,9 @@ private:
 		if(path.extension() == "icon" || path.extension() == "png")
 			image = Gfx::Image::load(entry.path()).value_or(nullptr);
 
+		if(path.extension() == "thm")
+			image = UI::icon("/filetypes/theme");
+
 		if(!image) {
 			auto app = App::app_for_file(path);
 			if(app.has_value())
