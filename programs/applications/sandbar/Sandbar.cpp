@@ -16,17 +16,12 @@ Sandbar::Sandbar() {
 	// Get display dimensions
 	auto dims = UI::pond_context->get_display_dimensions();
 
-	// Make app menu
-	m_app_menu = AppMenu::make();
-
 	// Make sandbar widget
-	m_widget = SandbarWidget::make(m_app_menu);
+	m_widget = SandbarWidget::make();
 	window->set_contents(m_widget);
 
 	// Position window at bottom of screen and show
 	window->set_position({0, dims.height - window->dimensions().height});
 	window->resize({dims.width, window->dimensions().height});
 	window->show();
-
-	m_app_menu->window()->set_position({0, dims.height - m_app_menu->window()->dimensions().height - window->dimensions().height});
 }

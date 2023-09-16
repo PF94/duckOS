@@ -17,5 +17,4 @@ private:
 
 	Duck::Ptr<UI::Window> m_window;
 	Duck::Ptr<SandbarWidget> m_widget;
-	Duck::Ptr<AppMenu> m_app_menu;
 };

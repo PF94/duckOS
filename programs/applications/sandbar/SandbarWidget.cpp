@@ -1,5 +1,6 @@
 /* SPDX-License-Identifier: GPL-3.0-or-later */
 /* Copyright © 2016-2023 Byteduck */
+/* Copyright © 2023 Chaziz */
 
 #include "SandbarWidget.h"
 #include "Sandbar.h"
@@ -12,9 +13,8 @@
 using namespace UI;
 using namespace Duck;
 
-SandbarWidget::SandbarWidget(Duck::Ptr<AppMenu> app_menu):
-	m_layout(FlexLayout::make(FlexLayout::HORIZONTAL)),
-	m_app_menu(app_menu)
+SandbarWidget::SandbarWidget():
+	m_layout(FlexLayout::make(FlexLayout::HORIZONTAL))
 {
 	add_child(Cell::make(m_layout));
 
@@ -22,7 +22,9 @@ SandbarWidget::SandbarWidget(Duck::Ptr<AppMenu> app_menu):
 	m_duck_button->set_sizing_mode(UI::PREFERRED);
 	m_duck_button->set_style(ButtonStyle::INSET);
 	m_duck_button->on_pressed = [&] {
-		m_app_menu->toggle();
+		// FIXME: no matching function for call to 'SandbarWidget::open_menu(Duck::Ptr<UI::Menu>, Gfx::Point)'
+		// (despite the fact there's a way of opening menus using a Gfx::Point)
+		open_menu(create_menu());
 	};
 
 	m_layout->add_child(m_duck_button);
@@ -49,4 +51,20 @@ void SandbarWidget::do_repaint(const DrawContext& ctx) {
 
 Gfx::Dimensions SandbarWidget::preferred_size() {
 	return {100, Sandbar::HEIGHT};
+}
+
+Duck::Ptr<Menu> SandbarWidget::create_menu() {
+	auto apps = App::get_all_apps();
+
+	std::vector<Duck::Ptr<UI::MenuItem>> items;
+
+	for(auto app : apps) {
+		if(app.hidden())
+			continue;
+		items.push_back(UI::MenuItem::make(app.name(), [app] {
+			app.run();
+		}));
+	}
+
+	return UI::Menu::make(items);
 }
