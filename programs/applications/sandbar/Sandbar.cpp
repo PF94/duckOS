@@ -20,8 +20,8 @@ Sandbar::Sandbar() {
 	m_widget = SandbarWidget::make();
 	window->set_contents(m_widget);
 
-	// Position window at bottom of screen and show
-	window->set_position({0, dims.height - window->dimensions().height});
+	// Position window at top of screen and show
+	window->set_position({0, 0});
 	window->resize({dims.width, window->dimensions().height});
 	window->show();
 }

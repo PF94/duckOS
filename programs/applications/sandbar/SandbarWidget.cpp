@@ -56,15 +56,15 @@ Gfx::Dimensions SandbarWidget::preferred_size() {
 Duck::Ptr<Menu> SandbarWidget::create_menu() {
 	auto apps = App::get_all_apps();
 
-	std::vector<Duck::Ptr<UI::MenuItem>> items;
+	std::vector<Duck::Ptr<UI::MenuItem>> programs;
 
 	for(auto app : apps) {
 		if(app.hidden())
 			continue;
-		items.push_back(UI::MenuItem::make(app.name(), [app] {
+		programs.push_back(UI::MenuItem::make(app.name(), [app] {
 			app.run();
 		}));
 	}
 
-	return UI::Menu::make(items);
+	return UI::Menu::make(programs);
 }

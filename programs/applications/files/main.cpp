@@ -21,6 +21,7 @@
 #include <libui/widget/files/FileGridView.h>
 #include <libui/widget/layout/FlexLayout.h>
 #include <libui/widget/files/FileNavigationBar.h>
+#include <libui/widget/MenuBar.h>
 
 using namespace Duck;
 
@@ -44,10 +45,22 @@ protected:
 	void initialize() override {
 		auto main_flex = UI::FlexLayout::make(UI::FlexLayout::VERTICAL);
 		file_grid->delegate = self();
+
+		std::vector<Duck::Ptr<UI::MenuItem>> menulist = {
+			UI::MenuItem::make("File"),
+			UI::MenuItem::make("Edit"),
+			UI::MenuItem::make("View"),
+			UI::MenuItem::make("Tools"),
+			UI::MenuItem::make("Help"),
+		};
+		auto menu = UI::Menu::make(menulist);
+		auto menubar = UI::MenuBar::make(menu);
+
+		main_flex->add_child(header);
 		main_flex->add_child(file_grid);
 
 		auto window = UI::Window::make();
-		window->set_titlebar_accessory(header);
+		window->set_titlebar_accessory(menubar);
 		window->set_contents(main_flex);
 		window->set_resizable(true);
 		window->set_title("Files");
