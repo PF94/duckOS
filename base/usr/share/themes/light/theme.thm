@@ -4,6 +4,7 @@ Color fg = #000000
 Color accent = #4a80ed
 Color window = #c0c0c0
 Color window-title = #000000
+Color window-title-unfocused = #999999
 Color window-titlebar-a = #376ddb
 Color window-titlebar-b = #4a80ed
 Color shadow-1 = #808080
