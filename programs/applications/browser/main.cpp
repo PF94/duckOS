@@ -41,7 +41,7 @@ std::string to_lower(std::string s) {
 	return s;
 }
 
-class Browser: public Duck::Object, public UI::FileViewDelegate {
+class Browser: public Duck::Object {
 public:
 	DUCK_OBJECT_DEF(Browser);
 

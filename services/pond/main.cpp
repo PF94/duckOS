@@ -46,7 +46,7 @@ int main(int argc, char** argv, char** envp) {
 	if(!fork()) {
 		char* argv[] = {NULL};
 		char* envp[] = {NULL};
-		execve("/apps/sandbar.app/sandbar", argv, envp);
+		execve("/apps/sangria_desktop.app/sangria_desktop", argv, envp);
 		exit(-1);
 	}
 
